@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    image: mongo
+    container_name: db
+    ports:
+      - "27018:27017"
+  
+  file:
+    image: file:latest
+    ports:
+      - "3000:3000"
+    links:
+      - db
+    depends_on:
+      - db
+    labels:
+      kompose.service.type: LoadBalancer
+    

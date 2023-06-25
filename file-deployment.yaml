@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: file
+  name: file
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: file
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        io.kompose.network/kubernetes-default: "true"
+        io.kompose.service: file
+    spec:
+      containers:
+        - image: 543713428195.dkr.ecr.us-east-1.amazonaws.com/file-management:latest
+          name: file
+          ports:
+            - containerPort: 3000
+          resources: {}
+          # imagePullPolicy: Never
+      restartPolicy: Always
+status: {}
